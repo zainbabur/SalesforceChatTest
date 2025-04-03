@@ -113,5 +113,31 @@
 		setTimeout(() => {
 			banner.remove();
 		}, 10000);
+		
+		function resetTimeoutWarning() {
+			// Remove the banner on user activity
+			banner.remove();
+			// Remove the event listeners after the banner is removed
+			removeUserActivityListeners();
+		}
+
+		// Function to listen for user activity
+		function addUserActivityListeners() {
+			// Listen for mouse movements and clicks to detect user activity
+			document.addEventListener('mousemove', resetTimeoutWarning);
+			document.addEventListener('keydown', resetTimeoutWarning);  // Optional: listen for key presses as well
+			document.addEventListener('click', resetTimeoutWarning);  // Optional: listen for clicks
+		}
+
+		// Function to remove event listeners
+		function removeUserActivityListeners() {
+			document.removeEventListener('mousemove', resetTimeoutWarning);
+			document.removeEventListener('keydown', resetTimeoutWarning);
+			document.removeEventListener('click', resetTimeoutWarning);
+		}
+
+		// Start listening for user activity
+		addUserActivityListeners();
+
 	}
 </script>
