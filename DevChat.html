@@ -105,14 +105,14 @@
 		banner.style.textAlign = 'center';
 		banner.style.padding = '10px';
 		banner.style.fontSize = '16px';
-		banner.innerText = 'Your session is about to timeout, please respond!';
+		banner.innerText = 'Your chat session is about to timeout, please respond!';
 	
 		document.body.appendChild(banner);
 	
 		// Optional: Remove the banner after a few seconds
-		setTimeout(() => {
-			banner.remove();
-		}, 10000);
+		// setTimeout(() => {
+		// 	banner.remove();
+		// }, 10000);
 		
 		function resetTimeoutWarning() {
 			// Remove the banner on user activity
@@ -124,14 +124,14 @@
 		// Function to listen for user activity
 		function addUserActivityListeners() {
 			// Listen for mouse movements and clicks to detect user activity
-			document.addEventListener('mousemove', resetTimeoutWarning);
+			//document.addEventListener('mousemove', resetTimeoutWarning);
 			document.addEventListener('keydown', resetTimeoutWarning);  // Optional: listen for key presses as well
 			document.addEventListener('click', resetTimeoutWarning);  // Optional: listen for clicks
 		}
 
 		// Function to remove event listeners
 		function removeUserActivityListeners() {
-			document.removeEventListener('mousemove', resetTimeoutWarning);
+			//document.removeEventListener('mousemove', resetTimeoutWarning);
 			document.removeEventListener('keydown', resetTimeoutWarning);
 			document.removeEventListener('click', resetTimeoutWarning);
 		}
