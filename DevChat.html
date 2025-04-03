@@ -48,7 +48,7 @@
 		document.getElementById('closeInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.rejectInvite(); };
 		document.getElementById('rejectInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.rejectInvite(); }; // use this API call to reject invitations
 		document.getElementById('acceptInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.acceptInvite(); }; // use this API call to start chat from invitations
-		document.addEventListener('keyup', function(event) { if (event.keyCode == 27) { embedded_svc.inviteAPI.inviteButton.rejectInvite(); }})
+		document.addEventListener('keyup', function(event) { if (event.keyCode == 27) { embedded_svc.inviteAPI.inviteButton.rejectInvite(); }}); // Escape key to reject invitation
 	})();
 </script>
 <!-- End of Invitations -->
@@ -58,21 +58,6 @@
 	var initESW = function(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
 		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
-
-		//embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
-		//embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
-
-		//embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
-		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
-
-		// Settings for Chat
-		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
-			// Returns a valid button ID.
-		//};
-		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
-		//embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
-		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
 
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
@@ -92,10 +77,12 @@
 				isOfflineSupportEnabled: false
 			}
 		);
+
+		// Listen for chat timeout warning
 		window.embedded_svc.on('chatTimeoutWarning', function() {
-        		// Trigger your custom timeout banner when the warning is triggered
-        		showTimeoutBanner();
-    		});
+			// Trigger your custom timeout banner when the warning is triggered
+			showTimeoutBanner();
+		});
 	};
 
 	if (!window.embedded_svc) {
@@ -110,22 +97,22 @@
 	}
 
 	function showTimeoutBanner() {
-	    const banner = document.createElement('div');
-	    banner.style.position = 'fixed';
-	    banner.style.top = '0';
-	    banner.style.width = '100%';
-	    banner.style.backgroundColor = '#FF5733';  // Bright color to catch attention
-	    banner.style.color = '#FFFFFF';
-	    banner.style.textAlign = 'center';
-	    banner.style.padding = '10px';
-	    banner.style.fontSize = '16px';
-	    banner.innerText = 'Your session is about to timeout, please respond!';
+		const banner = document.createElement('div');
+		banner.style.position = 'fixed';
+		banner.style.top = '0';
+		banner.style.width = '100%';
+		banner.style.backgroundColor = '#FF5733';  // Bright color to catch attention
+		banner.style.color = '#FFFFFF';
+		banner.style.textAlign = 'center';
+		banner.style.padding = '10px';
+		banner.style.fontSize = '16px';
+		banner.innerText = 'Your session is about to timeout, please respond!';
 	
-	    document.body.appendChild(banner);
+		document.body.appendChild(banner);
 	
-	    // Optional: Remove the banner after a few seconds
-	    setTimeout(() => {
-		banner.remove();
-	    }, 5000);
+		// Optional: Remove the banner after a few seconds
+		setTimeout(() => {
+			banner.remove();
+		}, 5000);
 	}
 </script>
