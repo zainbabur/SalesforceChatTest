@@ -79,7 +79,7 @@
 		);
 
 		// Listen for chat timeout warning
-		window.embedded_svc.on('chatTimeoutWarning', function() {
+		embedded_svc.chatAPI.onTimeoutWarning(function() {
 			// Trigger your custom timeout banner when the warning is triggered
 			showTimeoutBanner();
 		});
